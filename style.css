@@ -1,0 +1,228 @@
+.task-1-container {
+  /*
+    :: estamos setando a div para usar o display grid e não flex 
+    :: we are setting div for use display grid and not the flex
+  */
+  display: grid;
+  /*
+    :: estamos colocando a div do tamanho de altura da 'view height' altura total da viewport
+    :: we are setting the height to 100% of the view height which is the total height of the viewport
+  */
+  height: 100vh;
+
+  /*
+    :: estamos criando 3 rows/linhas com o tamanho da segunda linha em 1fr pois sera a do meio/conteudo e precisa ter um tamanho maior
+    :: we are build 3 rows, and only the second row is 1fr of size because this row is content row and need the more size
+  */
+  grid-template-rows: auto 1fr auto;
+  
+}
+
+.item {
+  padding: 10px;
+  border: 1px solid rgb(202, 52, 240);
+  border-radius: 2px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.task-2-container {
+  display: grid;
+  height: 100vh;
+
+  /*
+    :: dividindo em 12 colunas com tamanho 1fr (fr é uma unidade de medida flexivel parecida com %, é uma fração de um espaço, preenche completamente os espaços sobrando entre os elementos.)
+    :: divided in 12 coluns with size equal 1fr (fr is unit of measurement flexible similar with %, and is a fraction of space, fill full the spaces remaining between the elements.)
+  */
+  grid-template-columns: repeat(12, 1fr); 
+  column-gap: 12px; /* :: espaço entre as colunas */
+
+  align-items: center;
+}
+
+.task-2-container .item-1 {
+  height: 250px;
+  /* Tem o mesmo resultado
+    grid-column-start: 2; inicia em 3 
+    grid-column-end: 6; termina em 5
+    
+    grid-column-start: 2;
+    grid-column-end: span 4; :: Um item de grid por padrão abrange uma única celular, caso queira mudar isto use a pavalra-chave span, neste caso o fim do item é na coluna 4, porém este item irá abranger as outras colunas
+  */
+  grid-column: 2 / span 4;
+}
+
+.task-2-container .item-2 {
+  height: 250px;
+  /* Tem o mesmo resultado
+    grid-column-start: 6;
+    grid-column-end: 12;
+
+    grid-column-start: 6;
+    grid-column-end: span 6;
+  */
+  grid-column: 6 / span 6;
+}
+
+.task-3-1-container {
+  display: grid;
+  height: 100vh;
+
+  grid-template-rows: auto auto 1fr auto auto auto; /* :: dividindo em 6 linha com apenas 1 com tamanho 1fr */
+  gap: 24px; /* :: espaços entre as linhas de 24px */
+}
+
+/* Configurações mobile */
+.task-3-2-container {
+  display: grid;
+  height: 100vh;
+
+  grid-template-rows: auto auto 1fr auto auto auto; /* :: dividindo em 6 linha com apenas 1 com tamanho 1fr */
+  gap: 24px; /* :: espaços entre as linhas de 24px */
+
+  grid-template-areas: 
+  "header"
+  "nav"
+  "main"
+  "sidebar"
+  "ads"
+  "footer";
+}
+
+.task-3-2-container .header {
+  grid-area: header;
+}
+
+.task-3-2-container .navigation {
+  grid-area: nav;
+}
+
+.task-3-2-container .ads {
+  grid-area: ads;
+}
+
+.task-3-2-container .sidebar {
+  grid-area: sidebar;
+}
+
+.task-3-2-container .main {
+  grid-area: main;
+}
+
+.task-3-2-container .footer {
+  grid-area: footer;
+}
+
+
+@media (min-width: 720px) { /* :: Vai usar este bloco de estilo quando a largura estiver com no minimo 720px até o próximo breakepoint */
+  .task-3-1-container {
+    grid-template-columns: repeat(12, 1fr); /* :: Ser for uma tela com largura minima de 720p então teremos 12 colunas com espaços de 1/12 */
+    grid-template-rows: auto auto 1fr auto; /* :: E teremos 4 linhas e apenas 1 linha com 1/4 */
+  }
+
+  .task-3-2-container {  
+    grid-template-rows: auto auto 1fr auto; /* :: dividindo em 4 linha com apenas 1 com tamanho 1fr */
+  
+    grid-template-areas: /* :: Definindo o template criando 3 colunas e 4 linhas*/
+    "header header header"
+    "nav nav nav"
+    "sidebar main main" /* :: sidebar ao lado do main */
+    "ads footer footer"; /* :: box-ads ao lado do footer */
+  }
+
+  /* Vamos fizer aos itens/divs como se comportar nas colunas */
+  .task-3-1-container .header {
+    grid-column: 1 / span 12; /* :: Vai preencher as 12 colunas */
+  }
+  
+  .task-3-1-container .navigation {
+    grid-column: 1 / span 12; /* :: Também vai preencher as 12 colunas */
+  }
+  
+  .task-3-1-container .main {
+    grid-column: 3 / span 10; /* :: Vai preencher da 3 coluna até a 10, deixando 2 colunas em ambos os lados */
+  }
+  
+  .task-3-1-container .sidebar {
+    grid-column: 1 / span 2; /* :: Vai preencher da 1 coluna até a 2 ficando ao lado esquerdo da main */
+    grid-row: 3; /* :: Esta usando linha nro 3 que por sinal é a maior de todas as linhas*/
+  }
+  
+  .task-3-1-container .ads {
+    grid-column: 1 / span 2; /* :: Vai preencher da 1 coluna até a 2 ficando ao lado esquerdo da main */
+  }
+  
+  .task-3-1-container .footer {
+    grid-column: 3 / span 10; /* :: Vai preencher da 1 coluna até a 2 ficando ao lado esquerdo da main */
+  }
+}
+
+/* O mesmo código de cima mas agora com propriedades para telas com no minimo 1020p */
+@media (min-width: 1020px) { /* :: Vai usar este bloco de estilo quando a largura estiver com no minimo 1020px até o próximo breakepoint */
+  .task-3-2-container {  
+    grid-template-rows: auto auto 1fr auto; /* :: dividindo em 4 linha com apenas 1 com tamanho 1fr */
+  
+    grid-template-areas: /* :: Definindo o template criando 4 colunas e 4 linhas */
+    "header header header header"
+    "sidebar nav nav ads"
+    "sidebar main main ads" /* :: sidebar ao lado do main */
+    "footer footer footer footer"; /* :: box-ads ao lado do footer */
+  }
+
+  .task-3-1-container .navigation {
+    grid-column: 3 / span 8;
+  }
+  
+  .task-3-1-container .main {
+    grid-column: 3 / span 8;
+  }
+  
+  .task-3-1-container .sidebar {
+    grid-row: 2 / 4;
+  }
+  
+  .task-3-1-container .ads {
+    grid-column: 11 / span 2;
+    grid-row: 2 / 4;
+  }
+  
+  .task-3-1-container .footer {
+    grid-column: 1 / span 12;
+  }
+}
+
+
+.task-4-container {
+  display: grid;
+  height: 100vh;
+
+  gap: 24px;
+
+  grid-template-columns: repeat(12, minmax(150px, 1fr));
+  grid-template-rows: auto auto 1fr auto; /* :: E teremos 4 linhas e apenas 1 linha com 1/4 */
+}
+
+.task-4-container .header {
+  grid-column: 1 / span 12;
+}
+
+.task-4-container .navigation {
+  grid-column: 1 / span 12;
+}
+
+.task-4-container .sidebar {
+  grid-column: 1 / span 3;
+  grid-row: 3;
+}
+
+.task-4-container .ads {
+  grid-column: 1 / span 3;
+  grid-row: 4;
+}
+
+.task-4-container .main {
+  grid-column: 4 / span 12;
+}
+
+.task-4-container .footer {
+  grid-column: 4 / span 12;
+}
